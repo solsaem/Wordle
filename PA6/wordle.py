@@ -30,7 +30,7 @@ class Wordle:
     def __str__(self):
         pass
 
-#hello
+
 def game(player):
     current_game = Wordle()
     print(current_game.word)
@@ -44,8 +44,6 @@ def game(player):
         current_game.add_guess(guess)
         guess_feedback = check_letters(current_game, current_game.word, guess)
         current_game.add_feedback(guess_feedback)
-    print(current_game.guesses)
-    print(current_game.feedback)
 
 
 def check_letters(current_game, word ,guess):
