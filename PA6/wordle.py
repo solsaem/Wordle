@@ -44,6 +44,10 @@ def game(player):
         current_game.add_guess(guess)
         guess_feedback = check_letters(current_game, current_game.word, guess)
         current_game.add_feedback(guess_feedback)
+        print(f'\n{guess} {guess_feedback}\n')
+        if guess_feedback == "CCCCC":
+            print("You found the word")
+            break
 
 
 def check_letters(current_game, word ,guess):
@@ -56,7 +60,7 @@ def check_letters(current_game, word ,guess):
         else:
             my_str += "-"
     return my_str
-
+    
 
 
 def check_guess(guess):
