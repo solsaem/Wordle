@@ -6,6 +6,14 @@ class Player:
         self.losses = 0
         self.played = 0
         self.highscore = []
+    
+    def add_game(self, game, won_or_lost):
+        self.played += 1
+        self.highscore.append(game)
+        if won_or_lost == True:
+            self.wins += 1
+        else:
+            self.losses += 1
 
 class Wordle:
     def __init__(self):
@@ -41,13 +49,16 @@ def game(player):
             print("Guess is not valid try again")
             guess = input("Enter guess number: ").lower()
             is_valid = check_guess(guess)
+        current_game.score += 1
         current_game.add_guess(guess)
         guess_feedback = check_letters(current_game, current_game.word, guess)
         current_game.add_feedback(guess_feedback)
         print(f'\n{guess} {guess_feedback}\n')
         if guess_feedback == "CCCCC":
             print("You found the word")
-            break
+            return current_game, True
+    print(f"The word was {current_game.word}")
+    return current_game, False
 
 
 def check_letters(current_game, word ,guess):
@@ -70,6 +81,7 @@ def check_guess(guess):
 
 def main():
     current_player = Player()
-    game(current_player)
+    this_game, win_or_loss = game(current_player)
+    current_player.add_game(this_game, win_or_loss)
 
 main()
