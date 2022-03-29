@@ -71,6 +71,8 @@ def check_letters(current_game, word ,guess):
         else:
             my_str += "-"
     return my_str
+
+#test hihi
     
 
 
