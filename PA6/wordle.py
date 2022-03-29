@@ -57,7 +57,7 @@ def check_letters(current_game, word ,guess):
             my_str += "-"
     return my_str
 
-
+#test hihi
 
 def check_guess(guess):
     if len(guess) != 5:
