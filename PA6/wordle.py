@@ -27,7 +27,7 @@ class Wordle:
     def __str__(self):
         pass
 
-#hæ
+#hello
 def game(player):
     current_game = Wordle()
     for i in range(0,5):
