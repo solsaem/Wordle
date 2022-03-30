@@ -1,4 +1,5 @@
 import random
+from secrets import choice
 
 class Player:
     def __init__(self):
@@ -35,7 +36,9 @@ class Wordle:
         self.score = 0
 
     def random_word(self):
-        file_object = open("/Users/halldorajohannsdottir/Documents/GitHub/Wordle/PA6/word_bank.txt", 'r')
+        #file_object = open("/Users/halldorajohannsdottir/Documents/GitHub/Wordle/PA6/word_bank.txt", 'r')
+        file_object = open("/Users/sol/Documents/GitHub/Wordle/PA6/word_bank.txt", 'r')
+
         read_file = file_object.read()
         list_of_words = read_file.split()
         random_number = random.randint(1,212)
@@ -51,10 +54,10 @@ class Wordle:
         pass
 
 
-def game(player):
+def game(player,guesses):
     current_game = Wordle()
     print(current_game.word)
-    for i in range(0,5):
+    for i in range(0,guesses):
         guess = input("Enter guess number: ").lower()
         is_valid = check_guess(guess)
         while is_valid == False:
@@ -88,13 +91,55 @@ def check_guess(guess):
     if len(guess) != 5:
         return False
 
+def options():
+    text = '\n p: play game \n s: see word bank \n a: add a word to bank \n h: highscores \n g: game history \n p: profiles \n q: quit game \n'
+    option = input(text)
+    return option
 
 
+def print_word_bank(bank):
+    print("\nWord bank:")
+    print(bank)
+
+def add_word_to_bank():
+    pass
 
 def main():
     current_player = Player()
-    this_game, win_or_loss = game(current_player)
-    current_player.add_game(this_game, win_or_loss)
-    print(current_player.find_highscores())
+    print("\nLet's play Wordle!")
+    
+    program_running = True
+    while program_running:
+        choice = options()
+        if choice == 'p':
+            print("Playing wordle \n")
+            this_game, win_or_loss = game(current_player)
+            current_player.add_game(this_game, win_or_loss)
+        
+        if choice == 's':
+            print("Word bank \n")
+            print_word_bank()
+        
+        if choice == 'a':
+            print("Adding a word to the bank")
+            add_word_to_bank()
+
+        if choice == 'h':
+            print("Highscores: \n")
+            print(current_player.find_highscores())
+
+        if choice == 'g':
+            print("Game history \n")
+
+        if choice == 'p':
+            print("Profiles \n")
+
+        if choice == 'q':
+            print("See you next time!")
+            program_running = False
+    
+    
+    
+    
 
 main()
