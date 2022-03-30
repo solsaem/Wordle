@@ -115,7 +115,7 @@ def main():
     while program_running:
         choice = options()
         if choice == 'p':
-            print("Playing wordle \n")
+            print("\nPlaying wordle! \n")
             guesses = try_guesses_input("How many guesses would you like to have?: ")
             length = try_length_input("What length do you want the word to be? (length 4-10): ")
             this_game, win_or_loss = game(current_player, guesses, word_bank, length)
@@ -136,7 +136,7 @@ def main():
             for i in range(len(highscore)):
                 if count > 5:
                     break
-                print(f"{i+1}.place: {highscore[i]} guess")
+                print(f" {i+1}.place: {highscore[i]} guess")
                 count += 1
 
         elif choice == 'g':
@@ -144,7 +144,7 @@ def main():
             print_history(current_player)
 
         elif choice == 'q':
-            print("See you next time!")
+            print("Thank you for playing! See you next time :)")
             program_running = False
 
         else:
