@@ -30,8 +30,8 @@ class Player:
 class Wordle:
     def __init__(self):
         self.word = self.random_word().lower()
-        self.guesses = []
-        self.feedback = []
+        self.guesses = None
+        self.feedback = None
         self.score = 0
 
     def random_word(self):
@@ -42,10 +42,10 @@ class Wordle:
         return list_of_words[random_number]
 
     def add_guess(self, guess):
-        self.guesses.append(guess)
+        self.guesses = guess
     
     def add_feedback(self, feedback):
-        self.feedback.append(feedback)
+        self.feedback = feedback
     
     def __str__(self):
         pass
