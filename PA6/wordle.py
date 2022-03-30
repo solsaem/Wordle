@@ -126,7 +126,6 @@ def main():
             current_player.add_game(this_game, win_or_loss)
         
         if choice == 's':
-            print("Word bank \n")
             print_word_bank()
         
         if choice == 'a':
