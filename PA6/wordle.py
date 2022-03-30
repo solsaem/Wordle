@@ -120,15 +120,15 @@ def main():
             this_game, win_or_loss = game(current_player, guesses, word_bank)
             current_player.add_game(this_game, win_or_loss)
         
-        if choice == 's':
+        elif choice == 's':
             print_word_bank(word_bank)
         
-        if choice == 'a':
+        elif choice == 'a':
             print("\nAdding a word to the bank")
             word = input("\nWhat five letter word would you like to add to the word bank?: ")
             add_word_to_bank(word, word_bank)
 
-        if choice == 'h':
+        elif choice == 'h':
             print("Highscores: \n")
             highscore = current_player.find_highscores()
             count = 0
@@ -138,17 +138,20 @@ def main():
                 print(f"Game nr.{i+1}: {highscore[i]} guess")
                 count += 1
 
-        if choice == 'g':
+        elif choice == 'g':
             print("Game history \n")
 
             print_history(current_player)
 
-        if choice == 'z':
+        elif choice == 'z':
             print("Profiles \n")
 
-        if choice == 'q':
+        elif choice == 'q':
             print("See you next time!")
             program_running = False
+
+        else:
+            print("Please choose one one of the optios below :)")
     
     
     
