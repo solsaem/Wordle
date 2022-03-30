@@ -15,8 +15,6 @@ class Player:
         else:
             self.losses += 1
 
-
-#þarf að laga
     def find_highscores(self):
         max_score = [float('inf'),float('inf'),float('inf'),float('inf'),float('inf')]
         for i in self.highscore:
@@ -86,13 +84,11 @@ def check_letters(current_game, word ,guess):
             my_str += "-"
     return my_str
 
-#test hihi
-    
-
-
 def check_guess(guess):
     if len(guess) != 5:
         return False
+
+
 
 
 def main():
