@@ -36,8 +36,8 @@ class Wordle:
         self.score = 0
 
     def random_word(self):
-        #file_object = open("/Users/halldorajohannsdottir/Documents/GitHub/Wordle/PA6/word_bank.txt", 'r')
-        file_object = open("/Users/sol/Documents/GitHub/Wordle/PA6/word_bank.txt", 'r')
+        file_object = open("/Users/halldorajohannsdottir/Documents/GitHub/Wordle/PA6/word_bank.txt", 'r')
+        #file_object = open("/Users/sol/Documents/GitHub/Wordle/PA6/word_bank.txt", 'r')
 
         read_file = file_object.read()
         list_of_words = read_file.split()
@@ -54,10 +54,10 @@ class Wordle:
         pass
 
 
-def game(player,guesses):
+def game(player, guesses):
     current_game = Wordle()
     print(current_game.word)
-    for i in range(0,guesses):
+    for i in range(0, guesses):
         guess = input("Enter guess number: ").lower()
         is_valid = check_guess(guess)
         while is_valid == False:
@@ -114,7 +114,8 @@ def main():
         choice = options()
         if choice == 'p':
             print("Playing wordle \n")
-            this_game, win_or_loss = game(current_player)
+            guesses = int(input("how many guesses would you like to have?: "))
+            this_game, win_or_loss = game(current_player, guesses)
             current_player.add_game(this_game, win_or_loss)
         
         if choice == 's':
@@ -132,7 +133,7 @@ def main():
         if choice == 'g':
             print("Game history \n")
 
-        if choice == 'p':
+        if choice == 'z':
             print("Profiles \n")
 
         if choice == 'q':
