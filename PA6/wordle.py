@@ -9,11 +9,28 @@ class Player:
     
     def add_game(self, game, won_or_lost):
         self.played += 1
-        self.highscore.append(game)
+        self.highscore.append(game.score)
         if won_or_lost == True:
             self.wins += 1
         else:
             self.losses += 1
+
+
+#þarf að laga
+    def find_highscores(self):
+        max_score = [0,0,0,0,0]
+        for i in self.highscore:
+            for j in range(0,5):
+                if i > max_score[j]:
+                    max_score[j] == i
+                    break
+
+        for i in max_score:
+            if i == 0:
+                max_score.remove(i)
+        return max_score
+
+
 
 class Wordle:
     def __init__(self):
@@ -55,7 +72,7 @@ def game(player):
         current_game.add_feedback(guess_feedback)
         print(f'\n{guess} {guess_feedback}\n')
         if guess_feedback == "CCCCC":
-            print("You found the word")
+            print(f"You found the word {current_game.word}")
             return current_game, True
     print(f"The word was {current_game.word}")
     return current_game, False
@@ -85,5 +102,6 @@ def main():
     current_player = Player()
     this_game, win_or_loss = game(current_player)
     current_player.add_game(this_game, win_or_loss)
+    print(current_player.find_highscores())
 
 main()
