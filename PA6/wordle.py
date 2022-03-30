@@ -4,7 +4,8 @@ from wordbank import *
 from player import *
 
 class Wordle:
-    def __init__(self, wordbank):
+    def __init__(self, wordbank, length):
+        self.length = length
         self.wordbank = wordbank
         self.word = self.random_word().lower()
         self.guesses = []
@@ -13,8 +14,9 @@ class Wordle:
         
 
     def random_word(self):
-        random_number = random.randint(1,212)
-        return self.wordbank.word_list[random_number]
+        list_of_words_right_length = [x for x in self.wordbank.word_list if len(x) == self.length]
+        random_number = random.randint(1,len(list_of_words_right_length))
+        return list_of_words_right_length[random_number]
 
     def add_guess(self, guess):
         self.guesses.append(guess)
@@ -26,22 +28,22 @@ class Wordle:
         pass
 
 
-def game(player, guesses, wordbank):
-    current_game = Wordle(wordbank)
+def game(player, guesses, wordbank, length):
+    current_game = Wordle(wordbank,length)
     print(current_game.word)
     for i in range(0, guesses):
-        guess = input("Enter guess number: ").lower()
-        is_valid = check_guess(guess)
+        guess = input(f"Enter guess number {i+1}: ").lower()
+        is_valid = check_guess(guess, length)
         while is_valid == False:
             print("Guess is not valid try again")
-            guess = input("Enter guess number: ").lower()
-            is_valid = check_guess(guess)
+            guess = input(f"Enter guess number {i+1}: ").lower()
+            is_valid = check_guess(guess, length)
         current_game.score += 1
         current_game.add_guess(guess)
-        guess_feedback = check_letters(current_game, current_game.word, guess)
+        guess_feedback = check_letters(current_game, current_game.word, guess, length)
         current_game.add_feedback(guess_feedback)
         print_previous(current_game)
-        if guess_feedback == "CCCCC":
+        if guess_feedback == "C"*length:
             print(f"You found the word {current_game.word}")
             return current_game, True
     print(f"The word was {current_game.word}")
@@ -52,9 +54,9 @@ def print_previous(game):
         print(f"{game.guesses[i]} {game.feedback[i]}")
 
 
-def check_letters(current_game, word ,guess):
+def check_letters(current_game, word ,guess, length):
     my_str = ""
-    for i in range(0,5):
+    for i in range(0,length):
         if guess[i] == word[i]:
             my_str += "C"
         elif guess[i] in word:
@@ -63,14 +65,14 @@ def check_letters(current_game, word ,guess):
             my_str += "-"
     return my_str
 
-def check_guess(guess):
-    if len(guess) != 5:
+def check_guess(guess, length):
+    if len(guess) != length:
         return False
 
 def options():
     text = '\n p: play game \n a: add a word to bank \n g: game history \n h: highscores \n s: see word bank \n z: profiles \n q: quit game \n'
     print(text)
-    option = input("Input: ")
+    option = input("Input: ").lower()
     return option
 
 
@@ -99,10 +101,10 @@ def print_history(player):
     for i in range(len(player.highscore)):
         print(f"Game nr.{i}: {games[i]} guesses")
 
-def try_input():
+def try_input(str):
     is_valid = True
     while is_valid:
-        guesses = input("How many guesses would you like to have?: ")
+        guesses = input(str)
         try:
             guesses = int(guesses)
             is_valid = False
@@ -120,8 +122,9 @@ def main():
         choice = options()
         if choice == 'p':
             print("Playing wordle \n")
-            guesses = try_input()
-            this_game, win_or_loss = game(current_player, guesses, word_bank)
+            guesses = try_input("How many guesses would you like to have?: ")
+            length = try_input("What length do you want the word to be?: ")
+            this_game, win_or_loss = game(current_player, guesses, word_bank, length)
             current_player.add_game(this_game, win_or_loss)
         
         elif choice == 's':
