@@ -1,4 +1,5 @@
 import random
+from datetime import date
 
 class Wordle:
     def __init__(self, wordbank, length):
@@ -8,6 +9,7 @@ class Wordle:
         self.guesses = []
         self.feedback = []
         self.score = 0
+        self.time = date.today()
         
 
     def random_word(self):
@@ -21,5 +23,5 @@ class Wordle:
     def add_feedback(self, feedback):
         self.feedback.append(feedback)
     
-    def __str__(self):
-        pass
+
+    

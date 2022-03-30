@@ -19,9 +19,9 @@ def game(player, guesses, wordbank, length):
         current_game.add_feedback(guess_feedback)
         print_previous(current_game)
         if guess_feedback == "C"*length:
-            print(f"You found the word {current_game.word}")
+            print(f"\n You win! \n You found the word: {current_game.word}")
             return current_game, True
-    print(f"The word was {current_game.word}")
+    print(f"\n Sorry, you didn't find the word :( \n The word was {current_game.word}")
     return current_game, False
 
 def print_previous(game):
@@ -74,7 +74,7 @@ def add_word_to_bank(word, wordbank):
 def print_history(player):
     games = [x.score for x in player.highscore]
     for i in range(len(player.highscore)):
-        print(f"Game nr.{i}: {games[i]} guesses")
+        print(f" Game nr.{i+1} \n ~~~~~~~~~ \n date: {player.highscore[i].time} \n number of guesses: {games[i]}")
 
 def try_guesses_input(str):
     is_valid = True
@@ -139,7 +139,7 @@ def main():
                 count += 1
 
         elif choice == 'g':
-            print("Game history \n")
+            print("\n Game history \n")
             print_history(current_player)
 
         elif choice == 'q':
