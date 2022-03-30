@@ -39,15 +39,16 @@ class Player:
 
 class Wordle:
     def __init__(self, wordbank):
+        self.wordbank = wordbank
         self.word = self.random_word().lower()
         self.guesses = None
         self.feedback = None
         self.score = 0
-        self.wordbank = wordbank
+        
 
     def random_word(self):
         random_number = random.randint(1,212)
-        return self.wordbank[random_number]
+        return self.wordbank.word_list[random_number]
 
     def add_guess(self, guess):
         self.guesses = guess
