@@ -107,9 +107,13 @@ def print_word_bank():
         print(i)
     
 
-
-def add_word_to_bank():
-    pass
+def add_word_to_bank(word):
+    word_list = open_file()
+    if word in word_list:
+        print("\n This word is already in thw word bank!")
+    elif len(word) == 5:
+        word_list.append(word) ### klára
+    
 
 def main():
 
@@ -130,7 +134,8 @@ def main():
         
         if choice == 'a':
             print("Adding a word to the bank")
-            add_word_to_bank()
+            word = input("What word would you like to add to the word bank?:")
+            add_word_to_bank(word)
 
         if choice == 'h':
             print("Highscores: \n")
