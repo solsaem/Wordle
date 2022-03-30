@@ -1,4 +1,13 @@
+
 import random
+
+class WordBank:
+    def __init__(self):
+        self.word_list = open_file()
+
+    def add_word(self, word):
+        if word not in self.word_list:
+            self.word_list.append(word + '\n')
 
 
 class Player:
@@ -29,16 +38,16 @@ class Player:
 
 
 class Wordle:
-    def __init__(self):
+    def __init__(self, wordbank):
         self.word = self.random_word().lower()
         self.guesses = None
         self.feedback = None
         self.score = 0
+        self.wordbank = wordbank
 
     def random_word(self):
-        list_of_words = open_file()
         random_number = random.randint(1,212)
-        return list_of_words[random_number]
+        return self.wordbank[random_number]
 
     def add_guess(self, guess):
         self.guesses = guess
@@ -56,8 +65,8 @@ def open_file():
     read_file = file_object.read()
     return read_file.split()
 
-def game(player, guesses):
-    current_game = Wordle()
+def game(player, guesses, wordbank):
+    current_game = Wordle(wordbank)
     print(current_game.word)
     for i in range(0, guesses):
         guess = input("Enter guess number: ").lower()
@@ -99,25 +108,24 @@ def options():
     return option
 
 
-def print_word_bank():
+def print_word_bank(wordbank):
     print("\nWord bank:")
-    word_list = open_file()
     print()
-    for i in word_list:
+    for i in wordbank.word_list:
         print(i)
     
 
-def add_word_to_bank(word):
-    word_list = open_file()
-    if word in word_list:
+def add_word_to_bank(word, wordbank):
+    if word in wordbank.word_list:
         print("\n This word is already in thw word bank!")
     elif len(word) == 5:
-        word_list.append(word) ### klára
+        wordbank.add_word(word) ### klára
     
 
 def main():
 
     current_player = Player()
+    word_bank = WordBank()
     print("\nLet's play Wordle!")
     
     program_running = True
@@ -126,16 +134,16 @@ def main():
         if choice == 'p':
             print("Playing wordle \n")
             guesses = int(input("how many guesses would you like to have?: "))
-            this_game, win_or_loss = game(current_player, guesses)
+            this_game, win_or_loss = game(current_player, guesses, word_bank)
             current_player.add_game(this_game, win_or_loss)
         
         if choice == 's':
-            print_word_bank()
+            print_word_bank(word_bank)
         
         if choice == 'a':
             print("Adding a word to the bank")
-            word = input("What word would you like to add to the word bank?:")
-            add_word_to_bank(word)
+            word = input("What word would you like to add to the word bank?: ")
+            add_word_to_bank(word, word_bank)
 
         if choice == 'h':
             print("Highscores: \n")
