@@ -92,9 +92,9 @@ def check_guess(guess):
 
 
 def main():
+
     current_player = Player()
     this_game, win_or_loss = game(current_player)
     current_player.add_game(this_game, win_or_loss)
-    print(current_player.find_highscores())
 
 main()
