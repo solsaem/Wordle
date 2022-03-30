@@ -18,17 +18,14 @@ class Player:
 
 #þarf að laga
     def find_highscores(self):
-        max_score = [0,0,0,0,0]
+        max_score = [float('inf'),float('inf'),float('inf'),float('inf'),float('inf')]
         for i in self.highscore:
             for j in range(0,5):
-                if i > max_score[j]:
-                    max_score[j] == i
+                if i < max_score[j]:
+                    max_score[j] = i
                     break
-
-        for i in max_score:
-            if i == 0:
-                max_score.remove(i)
-        return max_score
+            
+        return [x for x in max_score if x != float('inf')]
 
 
 
