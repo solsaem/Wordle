@@ -107,7 +107,7 @@ def main():
         choice = options()
         if choice == 'p':
             print("Playing wordle \n")
-            guesses = int(input("how many guesses would you like to have?: "))
+            guesses = int(input("How many guesses would you like to have?: "))
             this_game, win_or_loss = game(current_player, guesses, word_bank)
             current_player.add_game(this_game, win_or_loss)
         
@@ -126,7 +126,7 @@ def main():
             for i in range(len(highscore)):
                 if count > 5:
                     break
-                print(f"nr.{i+1}: {highscore[i]} guess")
+                print(f"Game nr.{i+1}: {highscore[i]} guess")
                 count += 1
 
         if choice == 'g':
