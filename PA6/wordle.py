@@ -90,6 +90,10 @@ def add_word_to_bank(word, wordbank):
     else:
         print("\nSorry! your word is too short :(")
     
+def print_history(player):
+    games = [x.score for x in player.highscore]
+    for i in range(len(player.highscore)):
+        print(f"Game nr.{i}: {games[i]} guesses")
 
 def main():
     print("\nLet's play Wordle!")
@@ -125,6 +129,8 @@ def main():
 
         if choice == 'g':
             print("Game history \n")
+
+            print_history(current_player)
 
         if choice == 'z':
             print("Profiles \n")
