@@ -24,8 +24,8 @@ class Wordle:
 
 
 def open_file():
-    #file_object = open("/Users/sol/Documents/GitHub/Wordle/PA6/word_bank.txt", 'r')
-    file_object = open("/Users/halldorajohannsdottir/Documents/GitHub/Wordle/PA6/word_bank.txt", 'r')
+    file_object = open("/Users/sol/Documents/GitHub/Wordle/PA6/word_bank.txt", 'r')
+    #file_object = open("/Users/halldorajohannsdottir/Documents/GitHub/Wordle/PA6/word_bank.txt", 'r')
     read_file = file_object.read()
     return read_file.split()
 
@@ -68,7 +68,8 @@ def check_guess(guess):
 
 def options():
     text = '\n p: play game \n a: add a word to bank \n g: game history \n h: highscores \n s: see word bank \n z: profiles \n q: quit game \n'
-    option = input(text)
+    print(text)
+    option = input("Input: ")
     return option
 
 
@@ -81,9 +82,16 @@ def print_word_bank(wordbank):
 
 def add_word_to_bank(word, wordbank):
     if word in wordbank.word_list:
-        print("\n This word is already in thw word bank!")
+        print("\n This word is already in the word bank!")
     elif len(word) == 5:
-        wordbank.add_word(word) ### klára
+        wordbank.add_word(word)
+        print(f"{word} added to word bank!")
+
+    elif len(word) > 5:
+        print("\nSorry! your word is too long :(")
+    
+    else:
+        print("\nSorry! your word is too short :(")
     
 
 def main():
@@ -105,8 +113,8 @@ def main():
             print_word_bank(word_bank)
         
         if choice == 'a':
-            print("Adding a word to the bank")
-            word = input("What word would you like to add to the word bank?: ")
+            print("\nAdding a word to the bank")
+            word = input("\nWhat five letter word would you like to add to the word bank?: ")
             add_word_to_bank(word, word_bank)
 
         if choice == 'h':
