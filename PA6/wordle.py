@@ -9,7 +9,7 @@ class Player:
     
     def add_game(self, game, won_or_lost):
         self.played += 1
-        self.highscore.append(game.score)
+        self.highscore.append(game)
         if won_or_lost == True:
             self.wins += 1
         else:
@@ -19,8 +19,8 @@ class Player:
         max_score = [float('inf'),float('inf'),float('inf'),float('inf'),float('inf')]
         for i in self.highscore:
             for j in range(0,5):
-                if i < max_score[j]:
-                    max_score[j] = i
+                if i.score < max_score[j]:
+                    max_score[j] = i.score
                     break
             
         return [x for x in max_score if x != float('inf')]
@@ -96,5 +96,6 @@ def main():
     current_player = Player()
     this_game, win_or_loss = game(current_player)
     current_player.add_game(this_game, win_or_loss)
+    print(current_player.find_highscores())
 
 main()
