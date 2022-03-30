@@ -17,6 +17,5 @@ class Player:
             game.lose_or_win = False
 
     def find_highscores(self):
-
         highscores = sorted([x.score for x in self.highscore if x.lose_or_win == True])
         return highscores

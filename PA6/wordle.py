@@ -2,24 +2,29 @@ from wordbank import *
 from player import *
 from classwordle import *
 
-
+#here is our implementation of the game itself
 def game(player, guesses, wordbank, length):
-    current_game = Wordle(wordbank,length)
-    for i in range(0, guesses):
+    current_game = Wordle(wordbank,length)   #create instance of Wordle
+    for i in range(0, guesses): # run the game as many times as user asks for
         guess = input(f"Enter guess number {i+1}: ").lower()
+        #checking if guess is valid
         is_valid = check_guess(guess, length)
         while is_valid == False:
             print("Guess is not valid try again")
             guess = input(f"Enter guess number {i+1}: ").lower()
             is_valid = check_guess(guess, length)
+        #modify classes
         current_game.score += 1
         current_game.add_guess(guess)
         guess_feedback = check_letters(current_game, current_game.word, guess, length)
         current_game.add_feedback(guess_feedback)
-        print_previous(current_game)
-        if guess_feedback == "C"*length:
+        
+        print_previous(current_game) #print feedback
+
+        if guess_feedback == "C"*length: #if you win
             print(f"\n You win! \n You found the word: {current_game.word}")
             return current_game, True
+    #if you loose
     print(f"\n Sorry, you didn't find the word :( \n The word was {current_game.word}")
     return current_game, False
 
@@ -27,6 +32,8 @@ def print_previous(game):
     for i in range(len(game.guesses)):
         print(f"{game.guesses[i]} {game.feedback[i]}")
 
+
+#create our feedback
 def check_letters(current_game, word ,guess, length):
     my_str = ""
     for i in range(0,length):
@@ -38,6 +45,7 @@ def check_letters(current_game, word ,guess, length):
             my_str += "-"
     return my_str
 
+#is guess right length
 def check_guess(guess, length):
     if len(guess) != length:
         return False
@@ -76,6 +84,8 @@ def print_history(player):
     for i in range(len(player.highscore)):
         print(f" Game nr.{i+1} \n ~~~~~~~~~ \n time: {player.highscore[i].time} \n date: {player.highscore[i].date} \n number of guesses: {games[i]} \n")
 
+
+# checks if nr of guesses is valid
 def try_guesses_input(str):
     is_valid = True
     while is_valid:
@@ -87,6 +97,7 @@ def try_guesses_input(str):
             print("Please input a number")
     return int(guesses)
 
+#is length of word valid
 def try_length_input(str):
     is_valid = True
     while is_valid:
@@ -111,7 +122,7 @@ def display_highscore(player):
         print(f" {i+1}.place: \n ~~~~~~~~~ \n number of guesses: {highscore[i]} \n time: {player.highscore[i].time} \n date: {player.highscore[i].date} \n")
         count += 1
 
-
+#Main program
 def main():
     print("\nLet's play Wordle!")
     word_bank = WordBank()
@@ -153,7 +164,4 @@ def main():
             print("Please choose one of the options below :)")
     
     
-    
-    
-
 main()

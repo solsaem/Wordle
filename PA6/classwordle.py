@@ -15,8 +15,6 @@ class Wordle:
         self.lose_or_win = None
 
 
-
-
     def random_word(self):
         list_of_words_right_length = [x for x in self.wordbank.word_list if len(x) == self.length]
         random_number = random.randint(1,len(list_of_words_right_length))
@@ -27,7 +25,6 @@ class Wordle:
     
     def add_feedback(self, feedback):
         self.feedback.append(feedback)
-    
 
 def get_time():
     now = datetime.now()
