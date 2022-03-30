@@ -5,7 +5,6 @@ from classwordle import *
 
 def game(player, guesses, wordbank, length):
     current_game = Wordle(wordbank,length)
-    print(current_game.word)
     for i in range(0, guesses):
         guess = input(f"Enter guess number {i+1}: ").lower()
         is_valid = check_guess(guess, length)

@@ -12,6 +12,7 @@ class Wordle:
         self.score = 0
         self.date = date.today()
         self.time = get_time()
+        self.lose_or_win = None
 
 
 

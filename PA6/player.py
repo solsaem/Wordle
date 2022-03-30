@@ -11,10 +11,12 @@ class Player:
         self.highscore.append(game)
         if won_or_lost == True:
             self.wins += 1
+            game.lose_or_win = True
         else:
             self.losses += 1
+            game.lose_or_win = False
 
     def find_highscores(self):
 
-        highscores = sorted([x.score for x in self.highscore])
+        highscores = sorted([x.score for x in self.highscore if x.lose_or_win == True])
         return highscores
