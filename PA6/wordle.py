@@ -36,11 +36,7 @@ class Wordle:
         self.score = 0
 
     def random_word(self):
-        #file_object = open("/Users/halldorajohannsdottir/Documents/GitHub/Wordle/PA6/word_bank.txt", 'r')
-        file_object = open("/Users/sol/Documents/GitHub/Wordle/PA6/word_bank.txt", 'r')
-
-        read_file = file_object.read()
-        list_of_words = read_file.split()
+        list_of_words = open_file()
         random_number = random.randint(1,212)
         return list_of_words[random_number]
 
@@ -54,12 +50,11 @@ class Wordle:
         pass
 
 
-# def open_file():
-#     try:
-#         file_stream = open("/word_bank.txt", "r")
-#         return file_stream
-#     except FileNotFoundError:
-#         return None
+def open_file():
+    #file_object = open("/Users/sol/Documents/GitHub/Wordle/PA6/word_bank.txt", 'r')
+    file_object = open("/Users/halldorajohannsdottir/Documents/GitHub/Wordle/PA6/word_bank.txt", 'r')
+    read_file = file_object.read()
+    return read_file.split()
 
 def game(player, guesses):
     current_game = Wordle()
@@ -104,9 +99,14 @@ def options():
     return option
 
 
-def print_word_bank(bank):
+def print_word_bank():
     print("\nWord bank:")
-    print(bank)
+    word_list = open_file()
+    print()
+    for i in word_list:
+        print(i)
+    
+
 
 def add_word_to_bank():
     pass
