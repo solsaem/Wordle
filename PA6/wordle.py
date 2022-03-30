@@ -26,12 +26,6 @@ class Wordle:
         pass
 
 
-def open_file():
-    file_object = open("/Users/sol/Documents/GitHub/Wordle/PA6/word_bank.txt", 'r')
-    #file_object = open("/Users/halldorajohannsdottir/Documents/GitHub/Wordle/PA6/word_bank.txt", 'r')
-    read_file = file_object.read()
-    return read_file.split()
-
 def game(player, guesses, wordbank):
     current_game = Wordle(wordbank)
     print(current_game.word)
