@@ -10,7 +10,7 @@ class Player:
     
     def add_game(self, game, won_or_lost):
         self.played += 1
-        self.highscore.append(game.score)
+        self.highscore.append(game)
         if won_or_lost == True:
             self.wins += 1
         else:
@@ -20,8 +20,8 @@ class Player:
         max_score = [float('inf'),float('inf'),float('inf'),float('inf'),float('inf')]
         for i in self.highscore:
             for j in range(0,5):
-                if i < max_score[j]:
-                    max_score[j] = i
+                if i.score < max_score[j]:
+                    max_score[j] = i.score
                     break
             
         return [x for x in max_score if x != float('inf')]
@@ -31,8 +31,8 @@ class Player:
 class Wordle:
     def __init__(self):
         self.word = self.random_word().lower()
-        self.guesses = []
-        self.feedback = []
+        self.guesses = None
+        self.feedback = None
         self.score = 0
 
     def random_word(self):
@@ -45,10 +45,10 @@ class Wordle:
         return list_of_words[random_number]
 
     def add_guess(self, guess):
-        self.guesses.append(guess)
+        self.guesses = guess
     
     def add_feedback(self, feedback):
-        self.feedback.append(feedback)
+        self.feedback = feedback
     
     def __str__(self):
         pass
@@ -105,6 +105,7 @@ def add_word_to_bank():
     pass
 
 def main():
+
     current_player = Player()
     print("\nLet's play Wordle!")
     
