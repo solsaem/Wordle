@@ -7,7 +7,7 @@ class WordBank:
             self.word_list.append(word)
 
 def open_file():
-    #file_object = open("/Users/sol/Documents/GitHub/Wordle/PA6/word_bank.txt", 'r')
-    file_object = open("/Users/halldorajohannsdottir/Documents/GitHub/Wordle/PA6/word_bank.txt", 'r')
+    file_object = open("/Users/sol/Documents/GitHub/Wordle/PA6/word_bank.txt", 'r')
+    #file_object = open("/Users/halldorajohannsdottir/Documents/GitHub/Wordle/PA6/word_bank.txt", 'r')
     read_file = file_object.read()
     return read_file.split()

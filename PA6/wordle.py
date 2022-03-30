@@ -1,31 +1,6 @@
-
-import random
 from wordbank import *
 from player import *
-
-class Wordle:
-    def __init__(self, wordbank, length):
-        self.length = length
-        self.wordbank = wordbank
-        self.word = self.random_word().lower()
-        self.guesses = []
-        self.feedback = []
-        self.score = 0
-        
-
-    def random_word(self):
-        list_of_words_right_length = [x for x in self.wordbank.word_list if len(x) == self.length]
-        random_number = random.randint(1,len(list_of_words_right_length))
-        return list_of_words_right_length[random_number]
-
-    def add_guess(self, guess):
-        self.guesses.append(guess)
-    
-    def add_feedback(self, feedback):
-        self.feedback.append(feedback)
-    
-    def __str__(self):
-        pass
+from classwordle import *
 
 
 def game(player, guesses, wordbank, length):
@@ -53,7 +28,6 @@ def print_previous(game):
     for i in range(len(game.guesses)):
         print(f"{game.guesses[i]} {game.feedback[i]}")
 
-
 def check_letters(current_game, word ,guess, length):
     my_str = ""
     for i in range(0,length):
@@ -70,7 +44,7 @@ def check_guess(guess, length):
         return False
 
 def options():
-    text = '\n p: play game \n a: add a word to bank \n g: game history \n h: highscores \n s: see word bank \n z: profiles \n q: quit game \n'
+    text = '\n p: play game \n a: add a word to bank \n g: game history \n h: highscores \n s: see word bank \n q: quit game \n'
     print(text)
     option = input("Input: ").lower()
     return option
@@ -86,22 +60,23 @@ def print_word_bank(wordbank):
 def add_word_to_bank(word, wordbank):
     if word in wordbank.word_list:
         print("\n This word is already in the word bank!")
-    elif len(word) == 5:
-        wordbank.add_word(word)
-        print(f"{word} added to word bank!")
+    elif len(word) < 4:
+        print("\nSorry! your word is too short :(")
 
-    elif len(word) > 5:
+    elif len(word) > 10:
         print("\nSorry! your word is too long :(")
     
     else:
-        print("\nSorry! your word is too short :(")
+        wordbank.add_word(word)
+        print(f"{word} added to word bank!")
+        
     
 def print_history(player):
     games = [x.score for x in player.highscore]
     for i in range(len(player.highscore)):
         print(f"Game nr.{i}: {games[i]} guesses")
 
-def try_input(str):
+def try_guesses_input(str):
     is_valid = True
     while is_valid:
         guesses = input(str)
@@ -111,6 +86,24 @@ def try_input(str):
         except:
             print("Please input a number")
     return int(guesses)
+
+def try_length_input(str):
+    is_valid = True
+    while is_valid:
+        length = input(str)
+        try:
+            length = int(length)
+            if length >= 4 and length <= 10:
+                is_valid = False
+            else:
+                print("Please pick a lenght of word between 4-10")
+        except:
+            print("Please input a number")
+    return int(length)
+    
+    
+
+
 
 def main():
     print("\nLet's play Wordle!")
@@ -122,8 +115,8 @@ def main():
         choice = options()
         if choice == 'p':
             print("Playing wordle \n")
-            guesses = try_input("How many guesses would you like to have?: ")
-            length = try_input("What length do you want the word to be?: ")
+            guesses = try_guesses_input("How many guesses would you like to have?: ")
+            length = try_length_input("What length do you want the word to be? (length 4-10): ")
             this_game, win_or_loss = game(current_player, guesses, word_bank, length)
             current_player.add_game(this_game, win_or_loss)
         
@@ -132,7 +125,7 @@ def main():
         
         elif choice == 'a':
             print("\nAdding a word to the bank")
-            word = input("\nWhat five letter word would you like to add to the word bank?: ")
+            word = input("\nWhat word would you like to add to the word bank?: ")
             add_word_to_bank(word, word_bank)
 
         elif choice == 'h':
@@ -142,22 +135,19 @@ def main():
             for i in range(len(highscore)):
                 if count > 5:
                     break
-                print(f"Game nr.{i+1}: {highscore[i]} guess")
+                print(f"{i+1}.place: {highscore[i]} guess")
                 count += 1
 
         elif choice == 'g':
             print("Game history \n")
             print_history(current_player)
 
-        elif choice == 'z':
-            print("Profiles \n")
-
         elif choice == 'q':
             print("See you next time!")
             program_running = False
 
         else:
-            print("Please choose one one of the optios below :)")
+            print("Please choose one of the options below :)")
     
     
     
