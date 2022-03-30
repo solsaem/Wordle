@@ -129,7 +129,7 @@ def main():
             add_word_to_bank(word, word_bank)
 
         elif choice == 'h':
-            print("Highscores: \n")
+            print("\nHighscores: \n")
             highscore = current_player.find_highscores()
             count = 0
             for i in range(len(highscore)):
@@ -139,7 +139,7 @@ def main():
                 count += 1
 
         elif choice == 'g':
-            print("\n Game history \n")
+            print("\nGame history \n")
             print_history(current_player)
 
         elif choice == 'q':
