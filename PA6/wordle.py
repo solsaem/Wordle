@@ -75,7 +75,7 @@ def print_history(player):
     games = [x.score for x in player.highscore]
     print(f" {player.played} Games played\n {player.wins} Games won\n {player.losses} Games lost \n")
     for i in range(len(player.highscore)):
-        print(f" Game nr.{i+1} \n ~~~~~~~~~ \n date: {player.highscore[i].time} \n number of guesses: {games[i]} \n")
+        print(f" Game nr.{i+1} \n ~~~~~~~~~ \n time: {player.highscore[i].time} \n date: {player.highscore[i].date} \n number of guesses: {games[i]} \n")
 
 def try_guesses_input(str):
     is_valid = True
@@ -103,7 +103,14 @@ def try_length_input(str):
     return int(length)
     
     
-
+def display_highscore(player):
+    highscore = player.find_highscores()
+    count = 0
+    for i in range(len(highscore)):
+        if count > 5:
+            break
+        print(f" {i+1}.place: \n ~~~~~~~~~ \n number of guesses: {highscore[i]} \n time: {player.highscore[i].time} \n date: {player.highscore[i].date} \n")
+        count += 1
 
 
 def main():
@@ -131,13 +138,9 @@ def main():
 
         elif choice == 'h':
             print("\nHighscores: \n")
-            highscore = current_player.find_highscores()
-            count = 0
-            for i in range(len(highscore)):
-                if count > 5:
-                    break
-                print(f" {i+1}.place: {highscore[i]} guess")
-                count += 1
+            
+            display_highscore(current_player)
+            
 
         elif choice == 'g':
             print("\nGame history \n")
