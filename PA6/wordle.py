@@ -95,6 +95,17 @@ def print_history(player):
     for i in range(len(player.highscore)):
         print(f"Game nr.{i}: {games[i]} guesses")
 
+def try_input():
+    is_valid = True
+    while is_valid:
+        guesses = input("How many guesses would you like to have?: ")
+        try:
+            guesses = int(guesses)
+            is_valid = False
+        except:
+            print("Please input a number")
+    return int(guesses)
+
 def main():
     print("\nLet's play Wordle!")
     word_bank = WordBank()
@@ -105,7 +116,7 @@ def main():
         choice = options()
         if choice == 'p':
             print("Playing wordle \n")
-            guesses = int(input("How many guesses would you like to have?: "))
+            guesses = try_input()
             this_game, win_or_loss = game(current_player, guesses, word_bank)
             current_player.add_game(this_game, win_or_loss)
         
