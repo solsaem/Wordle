@@ -98,11 +98,10 @@ def add_word_to_bank(word, wordbank):
     
 
 def main():
-
-    current_player = Player()
-    word_bank = WordBank()
     print("\nLet's play Wordle!")
-    
+    word_bank = WordBank()
+    current_player = Player()
+
     program_running = True
     while program_running:
         choice = options()
@@ -122,7 +121,13 @@ def main():
 
         if choice == 'h':
             print("Highscores: \n")
-            print(current_player.find_highscores())
+            highscore = current_player.find_highscores()
+            count = 0
+            for i in range(len(highscore)):
+                if count > 5:
+                    break
+                print(f"nr.{i+1}: {highscore[i]} guess")
+                count += 1
 
         if choice == 'g':
             print("Game history \n")

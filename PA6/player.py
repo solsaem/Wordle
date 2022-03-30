@@ -16,11 +16,6 @@ class Player:
             self.losses += 1
 
     def find_highscores(self):
-        max_score = [float('inf'),float('inf'),float('inf'),float('inf'),float('inf')]
-        for i in self.highscore:
-            for j in range(0,5):
-                if i.score < max_score[j]:
-                    max_score[j] = i.score
-                    break
-            
-        return [x for x in max_score if x != float('inf')]
+
+        highscores = sorted([x.score for x in self.highscore])
+        return highscores
