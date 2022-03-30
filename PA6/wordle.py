@@ -140,7 +140,6 @@ def main():
 
         elif choice == 'g':
             print("Game history \n")
-
             print_history(current_player)
 
         elif choice == 'z':
