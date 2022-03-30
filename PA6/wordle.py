@@ -73,8 +73,9 @@ def add_word_to_bank(word, wordbank):
     
 def print_history(player):
     games = [x.score for x in player.highscore]
+    print(f" {player.played} Games played\n {player.wins} Games won\n {player.losses} Games lost \n")
     for i in range(len(player.highscore)):
-        print(f" Game nr.{i+1} \n ~~~~~~~~~ \n date: {player.highscore[i].time} \n number of guesses: {games[i]}")
+        print(f" Game nr.{i+1} \n ~~~~~~~~~ \n date: {player.highscore[i].time} \n number of guesses: {games[i]} \n")
 
 def try_guesses_input(str):
     is_valid = True
