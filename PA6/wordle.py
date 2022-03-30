@@ -7,8 +7,8 @@ class Wordle:
     def __init__(self, wordbank):
         self.wordbank = wordbank
         self.word = self.random_word().lower()
-        self.guesses = None
-        self.feedback = None
+        self.guesses = []
+        self.feedback = []
         self.score = 0
         
 
@@ -17,10 +17,10 @@ class Wordle:
         return self.wordbank.word_list[random_number]
 
     def add_guess(self, guess):
-        self.guesses = guess
+        self.guesses.append(guess)
     
     def add_feedback(self, feedback):
-        self.feedback = feedback
+        self.feedback.append(feedback)
     
     def __str__(self):
         pass
@@ -40,12 +40,16 @@ def game(player, guesses, wordbank):
         current_game.add_guess(guess)
         guess_feedback = check_letters(current_game, current_game.word, guess)
         current_game.add_feedback(guess_feedback)
-        print(f'\n{guess} {guess_feedback}\n')
+        print_previous(current_game)
         if guess_feedback == "CCCCC":
             print(f"You found the word {current_game.word}")
             return current_game, True
     print(f"The word was {current_game.word}")
     return current_game, False
+
+def print_previous(game):
+    for i in range(len(game.guesses)):
+        print(f"{game.guesses[i]} {game.feedback[i]}")
 
 
 def check_letters(current_game, word ,guess):
