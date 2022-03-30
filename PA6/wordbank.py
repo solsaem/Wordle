@@ -4,7 +4,7 @@ class WordBank:
 
     def add_word(self, word):
         if word not in self.word_list:
-            self.word_list.append(word + '\n')
+            self.word_list.append(word)
 
 def open_file():
     #file_object = open("/Users/sol/Documents/GitHub/Wordle/PA6/word_bank.txt", 'r')

@@ -21,9 +21,6 @@ class Wordle:
     
     def add_feedback(self, feedback):
         self.feedback = feedback
-    
-    def __str__(self):
-        pass
 
 
 def open_file():
@@ -126,8 +123,7 @@ def main():
             print("See you next time!")
             program_running = False
     
-    
-    
+
     
 
 main()
